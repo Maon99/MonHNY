@@ -248,12 +248,12 @@
             " เอ้าชนนนน 🍻🍻🍻🍻🍻🍻🍻 "
         ];
 
-        // รูปภาพ (เปลี่ยน URL เป็นรูปของคุณ)
+        // รูปภาพ
         const images = [
-            "/api/placeholder/200/200",
-            "/api/placeholder/200/200",
-            "/api/placeholder/200/200",
-            "/api/placeholder/200/200"
+            "./1.png",
+            "./1.png",
+            "./1.png",
+            "./1.png"
         ];
 
         // จัดการเสียง
@@ -262,6 +262,7 @@
                 src: ['./BGM.mp3'],
                 loop: true,
                 volume: 0.3,
+                autoplay: true,  // เพิ่ม autoplay
                 html5: true,
                 preload: true,
                 onloaderror: function(id, err) {
@@ -367,27 +368,18 @@
             }
         }
 
-        // เริ่มต้นการทำงานของเสียง
-        function initAudio() {
-            document.body.addEventListener('click', function() {
-                if (!sounds.bgm.playing()) {
-                    sounds.bgm.play();
-                }
-            }, { once: true });
-
+        // เริ่มต้นการทำงาน
+        window.onload = function() {
+            updateMessage();
+            setInterval(updateMessage, 2000);
+            setInterval(updateImage, 3000);
+            
+            // ตรวจสอบและเล่นเพลงเป็นระยะ
             setInterval(() => {
                 if (!isMuted && !sounds.bgm.playing()) {
                     sounds.bgm.play();
                 }
-            }, 5000);
-        }
-
-        // เริ่มต้นการทำงาน
-        window.onload = function() {
-            initAudio();
-            updateMessage();
-            setInterval(updateMessage, 2000);
-            setInterval(updateImage, 3000);
+            }, 1000);
         };
     </script>
 </body>
